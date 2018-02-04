@@ -73,91 +73,10 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 		btnPanel.setBounds(280, 400, 250, 200);
 		btnPanel.setOpaque(true);
 		btnPanel.setLayout(new GridLayout(4, 0)); // GridLayout(int rows, int cols, int hgap, int vgap)
-		btnPanel.add(setBtn_Local());
-		btnPanel.add(setBtn_Online());
-		btnPanel.add(setBtn_Setting());
-		btnPanel.add(setBtn_Exit());
-	}
-
-	// Button for Local Game
-	private JButton setBtn_Local() {
-		JButton btn_Local = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_local_2.png")));
-		btn_Local.setFocusPainted(false);
-		btn_Local.setBorderPainted(false);
-		btn_Local.setContentAreaFilled(false);
-		btn_Local.setFont(new Font("Marker Felt", Font.BOLD, 40));
-		// Action Listener
-		btn_Local.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame jf = (JFrame) getRootPane().getParent();
-				jf.setContentPane(null); // jump to next panel
-				jf.setVisible(true);
-				JPanel imagePanel = (JPanel) jf.getContentPane();
-				imagePanel.setOpaque(false);
-			}
-		});
-		return btn_Local;
-	}
-
-	// Button for Onlinie Game
-	private JButton setBtn_Online() {
-		JButton btn_online = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_online_2.png")));
-		btn_online.setFocusPainted(false);
-		btn_online.setBorderPainted(false);
-		btn_online.setContentAreaFilled(false);
-		btn_online.setFont(new Font("Marker Felt", Font.BOLD, 40));
-		// Action Listener
-		btn_online.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame jf = (JFrame) getRootPane().getParent();
-				jf.setContentPane(null); // jump to next panel
-				jf.setVisible(true);
-				JPanel imagePanel = (JPanel) jf.getContentPane();
-				imagePanel.setOpaque(false);
-			}
-		});
-		return btn_online;
-	}
-
-	// Button for Setting
-	private JButton setBtn_Setting() {
-		JButton btn_setting = new JButton(
-				new ImageIcon(getClass().getResource("/Resource/background/btn_setting_2.png")));
-		btn_setting.setFocusPainted(false);
-		btn_setting.setBorderPainted(false);
-		btn_setting.setContentAreaFilled(false);
-		btn_setting.setFont(new Font("Marker Felt", Font.BOLD, 40));
-		// Action Listener
-		btn_setting.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame jf = (JFrame) getRootPane().getParent();
-				jf.setContentPane(null); // jump to next panel
-				jf.setVisible(true);
-				JPanel imagePanel = (JPanel) jf.getContentPane();
-				imagePanel.setOpaque(false);
-			}
-		});
-		return btn_setting;
-	}
-
-	private JButton setBtn_Exit() {
-		JButton btn_exit = new JButton(
-				new ImageIcon(getClass().getResource("/Resource/background/btn_exit_2.png")));
-		btn_exit.setFocusPainted(false);
-		btn_exit.setBorderPainted(false);
-		btn_exit.setContentAreaFilled(false);
-		btn_exit.setFont(new Font("Marker Felt", Font.BOLD, 40));
-		// Action Listener
-		btn_exit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFrame jf = (JFrame) getRootPane().getParent();
-				jf.setContentPane(null); // jump to next panel
-				jf.setVisible(true);
-				JPanel imagePanel = (JPanel) jf.getContentPane();
-				imagePanel.setOpaque(false);
-			}
-		});
-		return btn_exit;
+		btnPanel.add(new Button("/Resource/background/btn_local_2.png", null));	//button image path and panel that will display
+		btnPanel.add(new Button("/Resource/background/btn_online_2.png", null));
+		btnPanel.add(new Button("/Resource/background/btn_setting_2.png", null));
+		btnPanel.add(new Button("/Resource/background/btn_exit_2.png", null));
 	}
 
 	@Override
