@@ -17,7 +17,7 @@ public class Game {
 	public static void main(String[] args) {
 		//setting JFrame
 		JFrame window = new JFrame("Survival Jungle"); //set the frame title
-		window.setContentPane(new MeunPanel()); //add panel
+		window.setContentPane(new MenuPanel()); //add panel
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //set close button
 		window.setResizable(false); //restrict the frame size
 		window.pack();
