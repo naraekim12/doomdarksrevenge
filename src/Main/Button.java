@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public class Button extends JButton{
 	public Button (String imgPath, JPanel panel) {
-		this.setIcon(new ImageIcon(getClass().getResource(imgPath)));
+		setIcon(new ImageIcon(getClass().getResource(imgPath)));
 		setFocusPainted(false);
 		setBorderPainted(false);
 		setContentAreaFilled(false);
