@@ -60,7 +60,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 	// Setting Background panel and add the background image.
 	private void setBackground() {
 		bgPanel.setBounds(0, 0, WIDTH, HEIGHT);
-		Icon background_img = new ImageIcon(getClass().getResource("/Resource/background/animated_2.gif"));
+		Icon background_img = new ImageIcon(getClass().getResource("/Resource/background/bg.gif"));
 		JLabel background = new JLabel(background_img);
 		background.setIcon(background_img);
 		bgPanel.add(background);
