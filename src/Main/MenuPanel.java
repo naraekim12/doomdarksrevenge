@@ -2,12 +2,8 @@ package Main;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 //import GameState.GameStateManager;
 
@@ -16,13 +12,14 @@ public class MenuPanel extends JPanel implements Runnable{
 	
 	JFrame frame;
 	
-	//Panel for menu
+	//Panel for btn
+	private JPanel btnPanel;
 	//private final JPanel MENUPANEL new JPanel();
 	
 	// dimensions
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
-	public static final int SCALE = 2;
+	public static final int WIDTH = 800; //background width
+	public static final int HEIGHT = 600; //background height
+
 	
 	// game thread
 	private Thread thread;
@@ -34,15 +31,20 @@ public class MenuPanel extends JPanel implements Runnable{
 //	private GameStateManager gsm;//Command pattern : abstract class.
 	
 	//constructor
-	public MenuPanel() {
+	public MenuPanel(JFrame frame) {
 		super();
-		//setLayout(new GridBagLayout());
-		//this.layout =
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setLayout(new GridBagLayout()); // root panel layout
+		setSize(WIDTH, HEIGHT); // root panel dimension
+		
+		btnPanel = new JPanel(); // instance for btn panel.
+		setBtnPanel(); //set Button Panel
+		add(btnPanel); // add the Button Panel into Main Panel.
+		
+		
 		setFocusable(true);
 		requestFocus();
-		frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-		//init();
+		this.frame = frame;
+		init();
 		//gsm = new GameStateManager();
 	}
 	
@@ -55,15 +57,39 @@ public class MenuPanel extends JPanel implements Runnable{
 		
 	}
 	private void setBackground() {
-		ImageIcon background = new ImageIcon(MenuPanel.class.getResource("/Resource/background/animated_2.gif"));
-		JLabel label = new JLabel(new ImageIcon(background.getImage().getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-//		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		ImageIcon background = new ImageIcon("/Resource/background/animated_2.gif");
+		JLabel label = new JLabel(new ImageIcon(background.getImage()));
+		//label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		frame.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
 		frame.setVisible(true);
 		Insets a = frame.getInsets();
 	}
 	
-	private void setBtn_Local() {}
+	private void setBtnPanel() {
+		btnPanel.setLayout(new GridLayout(4,0)); // GridLayout(int rows, int cols, int hgap, int vgap)
+		btnPanel.setSize(WIDTH/3,HEIGHT/3);
+		btnPanel.setBackground(new Color(0,0,0,100));// transparent color
+		//btnPanel.setBorder(new EmptyBorder(50,50,50,50)); //set the gap between btn and panel.
+		btnPanel.add(setBtn_Local());
+	}
+	private JButton setBtn_Local() {
+		JButton btn_Local = new JButton(new ImageIcon("/Resource/background/button(3).png"));
+		btn_Local.setFocusPainted(false);
+		btn_Local.setBorderPainted(false);
+		btn_Local.setContentAreaFilled(false);
+		btn_Local.setFont(new Font("Marker Felt", Font.BOLD, 40));
+		// Action Listener
+		btn_Local.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jf = (JFrame) getRootPane().getParent();
+				jf.setContentPane(null); // jump to next panel
+				jf.setVisible(true);
+				JPanel imagePanel = (JPanel) jf.getContentPane();
+				imagePanel.setOpaque(false);
+			}
+		});
+		return btn_Local;
+	}
 	
 	private void setBtn_Online() {}
 	
