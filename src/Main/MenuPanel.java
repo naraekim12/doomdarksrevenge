@@ -69,7 +69,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 
 	// Setting the Button Panel and add btn into bthPanel
 	private void setBtnPanel() {
-		btnPanel.setBackground(new Color(0, 0, 0, 100));
+		btnPanel.setBackground(new Color(0, 0, 0, 0));
 		btnPanel.setBounds(280, 400, 250, 200);
 		btnPanel.setOpaque(true);
 		btnPanel.setLayout(new GridLayout(4, 0)); // GridLayout(int rows, int cols, int hgap, int vgap)
@@ -81,7 +81,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 
 	// Button for Local Game
 	private JButton setBtn_Local() {
-		JButton btn_Local = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_local.png")));
+		JButton btn_Local = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_local_2.png")));
 		btn_Local.setFocusPainted(false);
 		btn_Local.setBorderPainted(false);
 		btn_Local.setContentAreaFilled(false);
@@ -101,7 +101,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 
 	// Button for Onlinie Game
 	private JButton setBtn_Online() {
-		JButton btn_online = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_online.png")));
+		JButton btn_online = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_online_2.png")));
 		btn_online.setFocusPainted(false);
 		btn_online.setBorderPainted(false);
 		btn_online.setContentAreaFilled(false);
@@ -122,7 +122,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 	// Button for Setting
 	private JButton setBtn_Setting() {
 		JButton btn_setting = new JButton(
-				new ImageIcon(getClass().getResource("/Resource/background/btn_setting.png")));
+				new ImageIcon(getClass().getResource("/Resource/background/btn_setting_2.png")));
 		btn_setting.setFocusPainted(false);
 		btn_setting.setBorderPainted(false);
 		btn_setting.setContentAreaFilled(false);
@@ -142,7 +142,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 
 	private JButton setBtn_Exit() {
 		JButton btn_exit = new JButton(
-				new ImageIcon(getClass().getResource("/Resource/background/btn_exit.png")));
+				new ImageIcon(getClass().getResource("/Resource/background/btn_exit_2.png")));
 		btn_exit.setFocusPainted(false);
 		btn_exit.setBorderPainted(false);
 		btn_exit.setContentAreaFilled(false);
