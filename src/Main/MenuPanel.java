@@ -2,8 +2,11 @@ package Main;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import Command.Command;
 
 //import GameState.GameStateManager;
 
@@ -17,23 +20,16 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 	private JPanel btnPanel;
 	// private JLayeredPane basePanel;
 	private JPanel bgPanel;
-	// private final JPanel MENUPANEL new JPanel();
+	// arrayList for imgSrc
+	private String[] imgSrc = { "/Resource/background/btn_local_2.png", "/Resource/background/btn_online_2.png",
+			"/Resource/background/btn_setting_2.png", "/Resource/background/btn_exit_2.png" };
 
 	// dimensions
 	public static final int WIDTH = 800; // background width
 	public static final int HEIGHT = 600; // background height
 
-	// game thread
-	// private Thread thread;
-	// private boolean running;
-	// private int FPS = 60;
-	// private long targetTime = 1000 / FPS;
-
-	// game state manager
-	// private GameStateManager gsm;//Command pattern : abstract class.
-
 	// constructor for BasePanel
-	public MenuPanel(JFrame frame) {
+	public MenuPanel(JFrame frame) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		super();
 		btnPanel = new JPanel(); // instance for btn panel.
 		bgPanel = new JPanel(); // instance for bg panel
@@ -47,9 +43,10 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 		setVisible(true);
 		// gsm = new GameStateManager();
 	}
-	
+
 	// build the base panel component.
-	private void init() {
+	private void init() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+
 		// running = true;
 		setBackground();// set Background Panel
 		setBtnPanel(); // set Button Panel
@@ -68,15 +65,15 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 	}
 
 	// Setting the Button Panel and add btn into bthPanel
-	private void setBtnPanel() {
+	private void setBtnPanel() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		btnPanel.setBackground(new Color(0, 0, 0, 0));
 		btnPanel.setBounds(280, 400, 250, 200);
 		btnPanel.setOpaque(true);
 		btnPanel.setLayout(new GridLayout(4, 0)); // GridLayout(int rows, int cols, int hgap, int vgap)
-		btnPanel.add(new Button("/Resource/background/btn_local_2.png", null));	//button image path and panel that will display
-		btnPanel.add(new Button("/Resource/background/btn_online_2.png", null));
-		btnPanel.add(new Button("/Resource/background/btn_setting_2.png", null));
-		btnPanel.add(new Button("/Resource/background/btn_exit_2.png"));	//no panel given == exit
+
+		for (int i = 0; i < imgSrc.length; i++) {
+			btnPanel.add(new Button(imgSrc[i], i));
+		}
 	}
 
 	@Override

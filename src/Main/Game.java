@@ -17,7 +17,7 @@ import javax.swing.*;
 
 public class Game {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		//setting JFrame
 		JFrame window = new JFrame("Survival Jungle"); //set the frame title
 		window.setSize(800,600);

@@ -1,17 +1,15 @@
 package Main;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import javax.swing.*;
+import Command.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+@SuppressWarnings("serial")
+public class Button extends JButton {
+	private String[] cmd = { "LocalGame", "OnlineGame", "Setting", "Exit" };
 
-public class Button extends JButton{
-	public Button (String imgPath, JPanel panel) {
+	public Button(String imgPath, int panel) {
 		setIcon(new ImageIcon(getClass().getResource(imgPath)));
 		setFocusPainted(false);
 		setBorderPainted(false);
@@ -20,26 +18,17 @@ public class Button extends JButton{
 		// Action Listener
 		addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				JFrame jf = (JFrame) getRootPane().getParent();
-				jf.setContentPane(panel); // jump to next panel
+				try {
+					Command functionCmd = (Command) Class.forName("Command." + cmd[panel]).newInstance();
+					jf.setContentPane(functionCmd.execute());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} // jump to next panel
 				jf.setVisible(true);
 				JPanel imagePanel = (JPanel) jf.getContentPane();
 				imagePanel.setOpaque(false);
-			}
-		});
-	}
-	
-	public Button (String imgPath) {
-		setIcon(new ImageIcon(getClass().getResource(imgPath)));
-		setFocusPainted(false);
-		setBorderPainted(false);
-		setContentAreaFilled(false);
-		addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int i = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit the game?", "Confirm exit", JOptionPane.YES_NO_OPTION);
-				if (i == JOptionPane.YES_OPTION) {
-					System.exit(0);
-				}
 			}
 		});
 	}
