@@ -3,88 +3,84 @@ package Main;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import javax.swing.border.EmptyBorder;
 
 //import GameState.GameStateManager;
 
 //make the menuPanel.
-public class MenuPanel extends JPanel implements Runnable{ 
-	
-	JFrame frame;
-	
-	//Panel for btn
-	private JPanel btnPanel;
-	//private final JPanel MENUPANEL new JPanel();
-	
-	// dimensions
-	public static final int WIDTH = 800; //background width
-	public static final int HEIGHT = 600; //background height
+@SuppressWarnings("serial")
+public class MenuPanel extends JLayeredPane implements Runnable {
 
-	
+	JFrame frame;
+
+	// ALL Panel
+	private JPanel btnPanel;
+	// private JLayeredPane basePanel;
+	private JPanel bgPanel;
+	// private final JPanel MENUPANEL new JPanel();
+
+	// dimensions
+	public static final int WIDTH = 800; // background width
+	public static final int HEIGHT = 600; // background height
+
 	// game thread
-	private Thread thread;
-	private boolean running;
-	private int FPS = 60;
-	private long targetTime = 1000 / FPS;
-	
+	// private Thread thread;
+	// private boolean running;
+	// private int FPS = 60;
+	// private long targetTime = 1000 / FPS;
+
 	// game state manager
-//	private GameStateManager gsm;//Command pattern : abstract class.
-	
-	//constructor
+	// private GameStateManager gsm;//Command pattern : abstract class.
+
+	// constructor for BasePanel
 	public MenuPanel(JFrame frame) {
 		super();
-		setLayout(new GridBagLayout()); // root panel layout
-		setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));// root panel dimension
-		System.out.println(this.toString());
 		btnPanel = new JPanel(); // instance for btn panel.
+		bgPanel = new JPanel(); // instance for bg panel
+		this.frame = frame; // get the main frame
+		setLayout(new BorderLayout()); // root panel layout
+		setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));// root panel dimension
 		setFocusable(true);
 		requestFocus();
-		this.frame = frame;
-		System.out.println(frame.getWidth());
-		init();
-		
-		setVisible(true);
-		//gsm = new GameStateManager();
-	}
-	
 
-	
-	private void init() {
-		running = true;
-		setBtnPanel(); //set Button Panel
-		add(btnPanel, setBtnPanelPosition()); // add the Button Panel into Main Panel.
-		setBackground(this);
+		init();
+		setVisible(true);
+		// gsm = new GameStateManager();
 	}
 	
-	private GridBagConstraints setBtnPanelPosition() {
-		GridBagConstraints btn_panel_position = new GridBagConstraints();
-		btn_panel_position.anchor = GridBagConstraints.CENTER;
-		btn_panel_position.gridx = 50;
-		btn_panel_position.gridy = 50;
-		btn_panel_position.weightx = 100;
-		btn_panel_position.weighty = 100;
-		return btn_panel_position;
-	} 
-	
-	
-	private void setBackground(JPanel bgPanel) {
+	// build the base panel component.
+	private void init() {
+		// running = true;
+		setBackground();// set Background Panel
+		setBtnPanel(); // set Button Panel
+		add(btnPanel); // add Button Panel to BasePanel
+		add(bgPanel); // add Background Panel to BasePanel
+	}
+
+	// Setting Background panel and add the background image.
+	private void setBackground() {
+		bgPanel.setBounds(0, 0, WIDTH, HEIGHT);
 		Icon background_img = new ImageIcon(getClass().getResource("/Resource/background/animated_2.gif"));
 		JLabel background = new JLabel(background_img);
 		background.setIcon(background_img);
-
 		bgPanel.add(background);
-//		
+		bgPanel.setOpaque(false);
 	}
-	
+
+	// Setting the Button Panel and add btn into bthPanel
 	private void setBtnPanel() {
-		btnPanel.setLayout(new GridLayout(4,0)); // GridLayout(int rows, int cols, int hgap, int vgap)
-		btnPanel.setSize(WIDTH/3,HEIGHT/3);
-		btnPanel.setBackground(new Color(0,0,0,100));// transparent color
-		//btnPanel.setBorder(new EmptyBorder(50,50,50,50)); //set the gap between btn and panel.
+		btnPanel.setBackground(new Color(0, 0, 0, 100));
+		btnPanel.setBounds(280, 400, 250, 200);
+		btnPanel.setOpaque(true);
+		btnPanel.setLayout(new GridLayout(4, 0)); // GridLayout(int rows, int cols, int hgap, int vgap)
 		btnPanel.add(setBtn_Local());
+		btnPanel.add(setBtn_Online());
+		btnPanel.add(setBtn_Setting());
 	}
+
+	// Button for Local Game
 	private JButton setBtn_Local() {
-		JButton btn_Local = new JButton(new ImageIcon(getClass().getResource("/Resource/background/button(3).png")));
+		JButton btn_Local = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_local.png")));
 		btn_Local.setFocusPainted(false);
 		btn_Local.setBorderPainted(false);
 		btn_Local.setContentAreaFilled(false);
@@ -101,19 +97,55 @@ public class MenuPanel extends JPanel implements Runnable{
 		});
 		return btn_Local;
 	}
-	
-	private void setBtn_Online() {}
-	
-	private void setBtn_Setting() {}
-	
-	private void setBtn_Exit() {}
 
+	// Button for Onlinie Game
+	private JButton setBtn_Online() {
+		JButton btn_online = new JButton(new ImageIcon(getClass().getResource("/Resource/background/btn_online.png")));
+		btn_online.setFocusPainted(false);
+		btn_online.setBorderPainted(false);
+		btn_online.setContentAreaFilled(false);
+		btn_online.setFont(new Font("Marker Felt", Font.BOLD, 40));
+		// Action Listener
+		btn_online.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jf = (JFrame) getRootPane().getParent();
+				jf.setContentPane(null); // jump to next panel
+				jf.setVisible(true);
+				JPanel imagePanel = (JPanel) jf.getContentPane();
+				imagePanel.setOpaque(false);
+			}
+		});
+		return btn_online;
+	}
 
+	// Button for Setting
+	private JButton setBtn_Setting() {
+		JButton btn_setting = new JButton(
+				new ImageIcon(getClass().getResource("/Resource/background/btn_setting.png")));
+		btn_setting.setFocusPainted(false);
+		btn_setting.setBorderPainted(false);
+		btn_setting.setContentAreaFilled(false);
+		btn_setting.setFont(new Font("Marker Felt", Font.BOLD, 40));
+		// Action Listener
+		btn_setting.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jf = (JFrame) getRootPane().getParent();
+				jf.setContentPane(null); // jump to next panel
+				jf.setVisible(true);
+				JPanel imagePanel = (JPanel) jf.getContentPane();
+				imagePanel.setOpaque(false);
+			}
+		});
+		return btn_setting;
+	}
+
+	private void setBtn_Exit() {
+	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
