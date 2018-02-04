@@ -10,20 +10,21 @@
 //}
 package Main;
 
-import java.awt.Image;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
+
 
 public class Game {
 	
 	public static void main(String[] args) {
 		//setting JFrame
 		JFrame window = new JFrame("Survival Jungle"); //set the frame title
+		window.setSize(800,600);
 		window.setContentPane(new MenuPanel(window)); //add panel
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //set close button
-		window.setResizable(false); //restrict the frame size
+		window.setResizable(true); //restrict the frame size
+		//((JPanel) window.getContentPane()).setOpaque(false);
 		window.pack();
 		window.setVisible(true);
 		

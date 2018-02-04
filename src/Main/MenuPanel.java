@@ -34,16 +34,13 @@ public class MenuPanel extends JPanel implements Runnable{
 	public MenuPanel(JFrame frame) {
 		super();
 		setLayout(new GridBagLayout()); // root panel layout
-		setSize(WIDTH, HEIGHT); // root panel dimension
-		
+		setPreferredSize(new Dimension(frame.getWidth(), frame.getHeight()));// root panel dimension
+		System.out.println(this.toString());
 		btnPanel = new JPanel(); // instance for btn panel.
-		setBtnPanel(); //set Button Panel
-		add(btnPanel); // add the Button Panel into Main Panel.
-		
-		
 		setFocusable(true);
 		requestFocus();
 		this.frame = frame;
+		System.out.println(frame.getWidth());
 		init();
 		//gsm = new GameStateManager();
 	}
@@ -51,18 +48,31 @@ public class MenuPanel extends JPanel implements Runnable{
 
 	
 	private void init() {
-			
 		running = true;
+		setBtnPanel(); //set Button Panel
+		add(btnPanel, setBtnPanelPosition()); // add the Button Panel into Main Panel.
 		setBackground();
-		
 	}
+	
+	private GridBagConstraints setBtnPanelPosition() {
+		GridBagConstraints btn_panel_position = new GridBagConstraints();
+		btn_panel_position.anchor = GridBagConstraints.CENTER;
+		btn_panel_position.gridx = 50;
+		btn_panel_position.gridy = 50;
+		btn_panel_position.weightx = 100;
+		btn_panel_position.weighty = 100;
+		return btn_panel_position;
+	} 
+	
+	
 	private void setBackground() {
-		ImageIcon background = new ImageIcon("/Resource/background/animated_2.gif");
-		JLabel label = new JLabel(new ImageIcon(background.getImage()));
-		//label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
-		frame.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
+		ImageIcon background_img = new ImageIcon("/Resource/background/animated_2.gif");
+		JLabel background = new JLabel(new ImageIcon(background_img.getImage()));
+		//JLabel background = new JLabel(new ImageIcon(background_img.getImage().getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
+		frame.getLayeredPane().add(background, new Integer(Integer.MIN_VALUE));
 		frame.setVisible(true);
-		Insets a = frame.getInsets();
+		System.out.println(frame.getPreferredSize());
+		//Insets a = frame.getInsets();
 	}
 	
 	private void setBtnPanel() {
