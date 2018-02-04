@@ -76,6 +76,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 		btnPanel.add(setBtn_Local());
 		btnPanel.add(setBtn_Online());
 		btnPanel.add(setBtn_Setting());
+		btnPanel.add(setBtn_Exit());
 	}
 
 	// Button for Local Game
@@ -139,7 +140,24 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 		return btn_setting;
 	}
 
-	private void setBtn_Exit() {
+	private JButton setBtn_Exit() {
+		JButton btn_exit = new JButton(
+				new ImageIcon(getClass().getResource("/Resource/background/btn_exit.png")));
+		btn_exit.setFocusPainted(false);
+		btn_exit.setBorderPainted(false);
+		btn_exit.setContentAreaFilled(false);
+		btn_exit.setFont(new Font("Marker Felt", Font.BOLD, 40));
+		// Action Listener
+		btn_exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame jf = (JFrame) getRootPane().getParent();
+				jf.setContentPane(null); // jump to next panel
+				jf.setVisible(true);
+				JPanel imagePanel = (JPanel) jf.getContentPane();
+				imagePanel.setOpaque(false);
+			}
+		});
+		return btn_exit;
 	}
 
 	@Override
