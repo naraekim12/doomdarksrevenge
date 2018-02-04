@@ -84,7 +84,7 @@ public class MenuPanel extends JPanel implements Runnable{
 		btnPanel.add(setBtn_Local());
 	}
 	private JButton setBtn_Local() {
-		JButton btn_Local = new JButton(new ImageIcon("./button(3).png"));
+		JButton btn_Local = new JButton(new ImageIcon(getClass().getResource("/Resource/background/button(3).png")));
 		btn_Local.setFocusPainted(false);
 		btn_Local.setBorderPainted(false);
 		btn_Local.setContentAreaFilled(false);
