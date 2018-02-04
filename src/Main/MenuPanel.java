@@ -28,127 +28,29 @@ public class MenuPanel extends JPanel implements Runnable{
 	private GameStateManager gsm;//Command pattern : abstract class.
 	
 	//constructor
-	public GamePanel() {
+	public MenuPanel() {
 		super();
 		//setLayout(new GridBagLayout());
 		//this.layout =
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setFocusable(true);
 		requestFocus();
+		//init();
+		//gsm = new GameStateManager();
 	}
 	
 
-	public void addNotify() {
-		super.addNotify();
-		if(thread == null) {
-			thread = new Thread(this);
-			addMouseListener(this);
-			thread.start();
-		}
-	}
 	
 	private void init() {
-		
 
-		
 		running = true;
 		
-		gsm = new GameStateManager();
 		
 	}
+	private void setBackground() {}
+	private void setBtn_Local() {}
+	private void setBtn_Online() {}
+	private void setBtn_Setting() {}
+	private void setBtn_Exit() {}
 	
-	public void run() {
-		
-		init();
-		
-		long start;
-		long elapsed;
-		long wait;
-		
-		// game loop
-		while(running) {
-			
-			start = System.nanoTime();
-			
-			update();
-			draw();
-			drawToScreen();
-			
-			elapsed = System.nanoTime() - start;
-			
-			wait = targetTime - elapsed / 1000000;
-			if(wait < 0) wait = 5;
-			
-			try {
-				Thread.sleep(wait);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-	}
-	
-	private void update() {
-		gsm.update();
-	}
-	private void draw() {
-		gsm.draw(g);
-	}
-
-	/*private void drawToScreen() {
-		Graphics g2 = getGraphics();
-		g2.drawImage(image, 0, 0,
-				WIDTH * SCALE, HEIGHT * SCALE,
-				null);
-		g2.dispose();
-	}*/
-	
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
