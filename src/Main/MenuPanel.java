@@ -76,7 +76,7 @@ public class MenuPanel extends JLayeredPane implements Runnable {
 		btnPanel.add(new Button("/Resource/background/btn_local_2.png", null));	//button image path and panel that will display
 		btnPanel.add(new Button("/Resource/background/btn_online_2.png", null));
 		btnPanel.add(new Button("/Resource/background/btn_setting_2.png", null));
-		btnPanel.add(new Button("/Resource/background/btn_exit_2.png", null));
+		btnPanel.add(new Button("/Resource/background/btn_exit_2.png"));	//no panel given == exit
 	}
 
 	@Override
