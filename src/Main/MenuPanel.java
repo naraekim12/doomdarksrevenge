@@ -42,6 +42,8 @@ public class MenuPanel extends JPanel implements Runnable{
 		this.frame = frame;
 		System.out.println(frame.getWidth());
 		init();
+		
+		setVisible(true);
 		//gsm = new GameStateManager();
 	}
 	
@@ -51,7 +53,7 @@ public class MenuPanel extends JPanel implements Runnable{
 		running = true;
 		setBtnPanel(); //set Button Panel
 		add(btnPanel, setBtnPanelPosition()); // add the Button Panel into Main Panel.
-		setBackground();
+		setBackground(this);
 	}
 	
 	private GridBagConstraints setBtnPanelPosition() {
@@ -65,14 +67,13 @@ public class MenuPanel extends JPanel implements Runnable{
 	} 
 	
 	
-	private void setBackground() {
-		ImageIcon background_img = new ImageIcon("/Resource/background/animated_2.gif");
-		JLabel background = new JLabel(new ImageIcon(background_img.getImage()));
-		//JLabel background = new JLabel(new ImageIcon(background_img.getImage().getScaledInstance(frame.getWidth(), frame.getHeight(), Image.SCALE_DEFAULT)));
-		frame.getLayeredPane().add(background, new Integer(Integer.MIN_VALUE));
-		frame.setVisible(true);
-		System.out.println(frame.getPreferredSize());
-		//Insets a = frame.getInsets();
+	private void setBackground(JPanel bgPanel) {
+		Icon background_img = new ImageIcon(getClass().getResource("/Resource/background/animated_2.gif"));
+		JLabel background = new JLabel(background_img);
+		background.setIcon(background_img);
+
+		bgPanel.add(background);
+//		
 	}
 	
 	private void setBtnPanel() {
@@ -83,7 +84,7 @@ public class MenuPanel extends JPanel implements Runnable{
 		btnPanel.add(setBtn_Local());
 	}
 	private JButton setBtn_Local() {
-		JButton btn_Local = new JButton(new ImageIcon("/Resource/background/button(3).png"));
+		JButton btn_Local = new JButton(new ImageIcon("./button(3).png"));
 		btn_Local.setFocusPainted(false);
 		btn_Local.setBorderPainted(false);
 		btn_Local.setContentAreaFilled(false);
